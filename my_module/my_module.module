@@ -1,0 +1,183 @@
+<?php 
+
+
+//menu system for module and form
+function my_module_menu()
+{
+	$items = array();
+	$items['my_module/form'] = array(
+		'title' => t('My form'),
+		'page callback' => 'my_module_form',
+		'access arguments' => array('access content'),
+		'description' => t('My form'),
+		'type' => MENU_CALLBACK,
+);
+	return $items;
+
+}
+
+//generating form 
+function my_module_form() {
+
+#use drupal_render ato retrieve form 
+return drupal_render(drupal_get_form('my_module_my_form'));
+}
+
+
+//generating all element of form
+
+function my_module_my_form($form_state){
+
+/**
+$form['name'] = array(
+	'#type' => 'textfield' ,
+	'#title' => t('Name'),
+);
+ */
+
+		
+$form ['first'] = array(
+	'#type' => 'textfield',
+	'#title' => t('First name'),
+	'#collapsible' => TRUE,
+	'#collapsed' => FALSE,
+	'#required' => TRUE,
+#	'#default_value' => $form_state ['values']['first'] , //changed
+	'#description' => "Please enter your first name",
+	'#size' => 20,
+	'#maxlength' => 20,
+);
+
+
+
+$form ['last'] = array(
+	'#type' => 'textfield',
+	'#title' => t('Last name') ,
+	'#required' => TRUE,
+#	'#default_value' => $form_state['values']['last'],
+	'#description' => "Please enter your last name",
+	'#size' => 20,
+	'#maxlength' => 20,
+);
+
+$form ['year_of_birth'] = array(
+	'#type' => 'textfield',
+	'#title' => 'Year of birth',
+	'#required' => TRUE,
+	'#description' => 'Format is "YYYY"',
+	'#size' => 20,
+#	'default_value' => $form ['values']['year_of_birth'] ,
+);
+
+//Add another element to the form
+/**
+if (isset($form_state['storage']['another_name'])){
+	//this values is set after clicking on add another button
+
+	$form['first2'] = array(
+		'#type' => 'textfield',
+		'#title' => t('First name'),
+		'#description' => "Please  enter you name" ,
+		'#size' => 20,
+		'#maxlength' => 20,
+		'default-value' => $form_state ['values']['first2'],
+
+	);
+}
+*/
+
+
+
+
+$form['submit'] = array(
+	'#type' => 'submit' ,
+	'#value' => 'submit',
+);
+
+
+
+//Adding clear button 
+//not working
+
+$form['clear'] = array(
+	'#type' => 'submit',
+	'#value' => 'Reset form',
+	'#validate' => array('my_module_my_form_clear'),
+);
+
+// add another name button 
+/**
+if(empty($form_state['storage']['another_name']))
+{
+	$form ['another_name'] = array(
+		'#type' => 'submit',
+		'#value' => 'Add another name',
+		'#validate' => array('my_module_my_form_another_name'),
+	);
+
+}
+ */
+	return $form;
+
+}
+
+function my_module_my_form_another_name($form , &$form_state)
+{
+#	$form_state['storage']['another_name'] = TRUE;
+	$form_state['rebuild'] = TRUE;
+}
+
+//not working
+
+function my_module_my_form_clear($form , &$form_state){
+#	unset ($form_state['values']);
+
+#	unset ($form_state['values']);
+
+	$form_state['rebuild'] = TRUE;
+}
+ 
+
+function my_module_my_form_validate($form , &$form_state)
+{
+	$year_of_birth = $form_state['values'] ['year_of_birth'];
+	$first_name = $form_state['values'] ['first'];
+	$last_name = $form_state['values'] ['last'];
+/**
+	if(!$first_name)
+	{
+		form_set_error('first' , 'Please enter your first name');
+	}
+	if(!$last_name)
+	{
+		form_set_error('last', 'Please enter your last name');
+	}
+	
+	if(!$year_of_birth){
+		form_set_error('year_of_birth' , 'Please enter your year of birth');
+	}
+ */
+	if ($year_of_birth && ($year_of_birth < 1900 || $year_of_birth > 2012))
+       	{
+		form_set_error('Year of birth' , 'Enter a year between 1900 and 2012.');
+
+	}
+/**	if ($form_state['storage']['another_name']){
+		$first_name = $form_state['values']['first2'];
+		if(!$first_name){
+			form_set_error('first2','Please enter your first name');
+		}
+} */
+
+}
+
+function my_module_my_form_submit($form , &$form_state)
+{
+#	unset ($form_state['storage']);
+	drupal_set_message(t('This form has been submitted. '));
+}
+
+
+
+
+ 

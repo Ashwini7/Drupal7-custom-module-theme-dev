@@ -1,0 +1,54 @@
+<?php
+#golam table creation
+
+function golam_schema()
+{
+$schema['lordofthering'] = array(
+	'description' => 'The base table for movies',
+	'fields' => array(
+		'lid' => array(
+			'description' => 'The primary identifier for a lordofthering',
+			'type' => 'int',
+#			'unsigned' => TRUE,
+			'not null' => TRUE),
+		'moviename' => array(
+			'description' => 'The name of movies in the ring',
+			'type' => 'varchar',
+			'length' => 32,
+			'not null' => TRUE),
+		'actor' => array(
+			'description' => 'Name of the movie actor',
+			'type' => 'varchar',
+			'length' => 32,
+			'not null' => TRUE),
+		'email_id' => array(
+			'description' => 'The email id of actor',
+			'type' => 'varchar',
+			'length' => 32,
+			'not null' => TRUE),
+#		'primary key' => array('lid'),
+		
+));
+
+	return $schema;
+
+
+}
+
+function golam_install()
+{
+
+}
+
+function golam_uninstall()
+{
+
+}
+
+
+
+
+
+?>
+
+

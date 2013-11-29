@@ -1,0 +1,75 @@
+
+/* ---- Main text styles ---- */
+
+body {
+  font-family:  Arial, sans-serif;
+  font-size: 87.5%;
+  line-height: 1.4;
+  margin: 40px 20px ;
+  padding: 20px 20px;
+}
+
+ h1 {
+  font-weight: bold;
+  padding-bottom:0em;
+  float:right;
+  padding-right: 70%;
+}
+img
+{
+	height:10%;
+	width: 20%;
+	;
+
+
+}
+
+p {
+  padding-bottom: 1em;
+}
+
+a {
+  color: #092e20;
+}
+
+
+/* ---- Page layout ---- */
+
+#wrapper, #header, #footer {
+  width:80% ;
+  margin: 20px 20px ;
+  padding: 20px 20px;
+}
+
+
+#header {
+  background:#092e20 ;
+  padding: 10px;
+  color: #ffe761;
+}
+
+
+
+#content {
+  width:50% ;
+  float:left ;
+  padding-right:20px;
+  padding-left:20px;
+}
+
+#sidebar {
+  width: 40%;
+  float:left;
+  padding-left:70%;
+}
+
+#content, #content , #sidebar {
+  padding: 10px;
+}
+
+#footer{
+  border-top: 2px solid #666;
+  padding-left: 10px;
+  text-align: center;
+  float:left;
+}

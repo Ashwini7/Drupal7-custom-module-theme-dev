@@ -1,0 +1,11 @@
+name = Block sample
+description = An example of how a module can define blocks.
+core = 7.x
+dependencies[] = block
+
+
+; Information added by drupal.org packaging script on 11-12-12
+version = "7.x-1.x-dev"
+core = "7.x"
+
+
